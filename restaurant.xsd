@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!-- declaration des attribut image-->
+<xsd:attribute name="position">
+	<xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="droite"/>
+			<xsd:enumeration value="gauche"/>
+			<xsd:enumeration value="centre"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:attribute>
+	<!-- declaration des attribut url-->
+<xsd:attribute name="url" type="xsd:string"/>
+		
+	<!-- declaration des attribut plat type-->
+<xsd:attribute name="type">
+	<xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="entree"/>
+			<xsd:enumeration value="plat"/>
+			<xsd:enumeration value="frommage"/>
+			<xsd:enumeration value="dessert"/>
+		</xsd:restriction>
+	</xsd:simpleType>	
+</xsd:attribute>
+<!-- declaration des attribut carte-->
+<xsd:attribute name="id_carte" type="Id"/>
+
+<!-- declaration des attribut carte-->
+<xsd:attribute name="devise">
+	<xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Euro"/>
+			<xsd:enumeration value="Fcfa"/>
+		</xsd:restriction>
+	</xsd:simpleType>		
+</xsd:attribute>
+<!-- declaration des attribut ordre prix-->
+<xsd:attribute name="ordre">
+	<xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="prix"/>
+			<xsd:enumeration value="apparition"/>
+		</xsd:restriction>
+	</xsd:simpleType>	
+</xsd:attribute>	
+<!-- Fin declaration des attributs -->
+<!-- debut balise racine -->
+<xsd:element name="restaurants">
+<xsd:complexType>
+ 	<xsd:sequence>
+ 		<!-- debut balise restaurant -->
+ 		<xsd:element name="restaurant"/>
+ 			<xsd:complexType>
+ 				<xsd:sequence>
+ 				<!-- debut balise coordonnees -->
+ 				<xsd:element name="coordonnees"/>
+ 				<xsd:sequence>
+ 					<xsd:element name="nom" type="xs:string"/>
+ 					<xsd:element name="adresse" type="xs:string"/>
+ 					<xsd:element name="nom_restaurateur" type="xs:string"/>
+ 					<!-- debut balise description -->
+ 					<xsd:element name="description"/>
+ 						<xsd:complexType>
+ 							<xsd:sequence>
+ 								<xsd:element name="liste" type="xs:string"/>
+ 								<xsd:element name="paragraphe" type="xs:string"/>
+ 									<xsd:sequence>
+ 										<xsd:element name="image">
+ 											<xsd:complexType>
+ 											<xsd:attribute ref="url" use="required"/>
+ 											<xsd:attribute ref="position" use="required"/>
+ 											</xsd:complexType>
+ 										</xsd:element>
+ 									</xsd:sequence>
+ 							</xsd:sequence>
+ 						</xsd:complexType>
+ 						<!-- Fin balise description -->
+ 				</xsd:sequence>
+ 				<!-- Fin balise coordonnees -->
+ 				<!-- debut balise carte -->
+ 					<xsd:element name="carte">
+ 							<xsd:complexType> 
+ 								<xsd:attribute ref="id_carte" use="required"/>
+ 							</xsd:complexType>
+ 					</xsd:element>
+ 						<xsd:complexType>
+ 							<xsd:sequence>
+ 								<!-- debut balise plat -->
+ 									<xsd:element name="plat">
+ 									<xsd:attribute ref="type" use="required"/>
+ 									</xsd:element>
+ 										<xsd:sequence>
+ 	 										<xsd:element name="prix">
+ 											<xsd:complexType> 
+ 											<xsd:restriction ref="devise" use="required"></xsd:restriction>
+ 											</xsd:complexType>
+ 											</xsd:element>
+ 											<xsd:element name="description_carte" type="xs:string"/>
+ 										</xsd:sequence>
+ 										<!-- Fin balise plat -->
+ 							</xsd:sequence>
+ 							<!-- Fin balise carte -->
+ 						</xsd:complexType>
+ 						<!-- debut balise menus -->
+ 		 	 		<xsd:element name="menus"/>
+ 		 	 		<complexType>
+ 		 	 				<xsd:sequence>
+ 		 	 					<!-- debut balise menu -->
+ 		 	 			<xsd:element name="menu">
+ 							<xsd:complexType> 
+ 							<xsd:restriction ref="ordre" use="required"></xsd:restriction>
+ 							</xsd:complexType>
+ 						</xsd:element>
+ 						<xsd:sequence>
+ 							<xsd:element name="titre" type="xs:int"/>
+ 							<xsd:element name="description_menu" type="xs:string"/>
+ 							<xsd:element name="prix_menu" type="xs:string"/>
+ 						</xsd:sequence>
+ 						<!-- Fin balise menu -->
+ 							</xsd:sequence>
+ 							<!-- Fin balise menus -->
+ 					</complexType>
+ 					<xsd:complexType>
+ 						<!-- debut balise service_a_la_carte -->
+ 					<xsd:element name="service_a_la_carte"/>
+ 					<xsd:sequence>
+ 						<xsd:element name="description_plat" type="xs:string"/>
+ 						<xsd:element name="description_restaurant" type="xs:string"/>
+ 						<xsd:element name="prix_service"/>
+ 						<xsd:complexType> 
+ 							<xsd:restriction ref="devise" use="required"></xsd:restriction>
+ 						</xsd:complexType>
+ 					</xsd:sequence>
+ 					<!-- Fin balise service_a_la_carte -->
+ 					</xsd:complexType>
+ 		</xsd:sequence>
+ 		<!-- Fin balise restaurant -->
+ 		</xsd:complexType>	
+ 	</xsd:sequence>
+ 	<!-- Fin balise racine -->
+ </xsd:complexType> 
+</xsd:element>
+</xsd:schema>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE restaurants [
+<!ELEMENT restaurants (restaurant)>
+<!ELEMENT restaurant (coordonnees,carte,menus,service_a_la_carte)>
+<!ELEMENT coordonnees (nom,adresse,nom_restaurateur,description)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT adresse (#PCDATA)>
+<!ELEMENT nom_restaurateur (#PCDATA)>
+<!ELEMENT description (liste,paragraphe)>
+<!ELEMENT liste (#PCDATA)>
+<!ELEMENT paragraphe (#PCDATA|image)*>
+<!ELEMENT image EMPTY>
+<!ATTLIST image url CDATA #REQUIRED>
+<!ATTLIST image position ( centre | gauche | droite) #REQUIRED>
+<!ELEMENT carte (#PCDATA | plat | prix |description)*>
+<!ATTLIST carte id_carte (12345658) #REQUIRED>
+<!ELEMENT plat (#PCDATA | prix| description_carte)*>
+<!ATTLIST plat type (entree| dessert|plat|frommage) #REQUIRED>
+<!ELEMENT prix (#PCDATA) >
+<!ATTLIST prix devise (Euro | Fcfa) #REQUIRED>
+<!ELEMENT description_carte (#PCDATA)>
+<!ELEMENT menus (menu)>
+<!ELEMENT menu  (titre,description_menu,prix_menu)>
+<!ATTLIST menu ordre (prix | apparition) #REQUIRED>
+<!ELEMENT titre (#PCDATA)>
+<!ELEMENT description_menu (#PCDATA)>
+<!ELEMENT prix_menu (#PCDATA)>
+<!ELEMENT service_a_la_carte (description_plat,description_restaurant,prix_service)>
+<!ELEMENT description_plat (#PCDATA)>
+<!ELEMENT description_restaurant (#PCDATA)>
+<!ELEMENT prix_service (#PCDATA)>
+<!ATTLIST prix_service devise (Euro | Fcfa) #REQUIRED>
+]>
+<restaurants>
+	<restaurant>
+	<coordonnees>
+			<nom>
+				Gueule tapee
+			</nom>
+			<adresse>
+				Rue 25 X 26
+			</adresse>
+			<nom_restaurateur>
+				Brahim Elmoctar
+			</nom_restaurateur>
+			<description>
+					<liste>
+						qui somme nous ?
+					</liste>
+					<paragraphe> on est des super saiyans
+						<image url="image/etablissement.jpg" position="centre"/>
+					</paragraphe>
+			</description>
+	</coordonnees>
+	<carte id_carte="12345658">
+		<plat type="entree"> yassa poulet
+			<prix devise="Euro">50</prix>
+			<description_carte> riz poulet huile onions legumes ...</description_carte>
+		</plat>
+	</carte>
+	<menus>
+		<menu ordre="prix">
+			<titre> dejeuner</titre>
+			<description_menu> yassa poulet</description_menu>
+			<prix_menu> 50 Euro</prix_menu>
+		</menu>
+	</menus>
+	<service_a_la_carte>
+		<description_plat> yassa poulet</description_plat>
+		<description_restaurant>5 etoiles Gueule Tapee</description_restaurant>
+		<prix_service devise="Euro"> 50</prix_service>
+	</service_a_la_carte>
+</restaurant>
+</restaurants>
